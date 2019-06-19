@@ -1,5 +1,7 @@
 # bibliographeR <img src='man/img/sticker_moyen.png' align="right" height="139" />
 
+[![Travis build
+status](https://travis-ci.com/cecilesauder/bibliographeR.svg?branch=master)](https://travis-ci.com/cecilesauder/bibliographeR)
 
 ## Overview
 
