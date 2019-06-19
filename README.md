@@ -1,7 +1,7 @@
-# <img src='man/img/bibliographeR.png' align="left" height="100" /><img src='man/img/sticker_moyen.png' align="right" height="139" />
+# bibliographeR <img src='man/img/sticker_moyen.png' align="right" height="139" />
 
 
-
+## Overview
 
 Package with a shiny app
 
