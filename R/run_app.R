@@ -1,6 +1,9 @@
 #' Launch the app
 #'
-#'  @export
+#' @export
+#'
+#' @example
+#' run_app()
 run_app <- function() {
   appDir <- system.file("BibliographeR", package = "bibliographeR")
   if (appDir == "") {

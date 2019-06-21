@@ -7,5 +7,5 @@
 run_app()
 }
 \description{
-@export
+Launch the app
 }
