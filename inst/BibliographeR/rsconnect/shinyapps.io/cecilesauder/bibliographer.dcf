@@ -5,6 +5,6 @@ account: cecilesauder
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 991240
-bundleId: 2168230
+bundleId: 2174081
 url: https://cecilesauder.shinyapps.io/bibliographer/
-when: 1561083405.98878
+when: 1561379493.20671
