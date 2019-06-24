@@ -12,6 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    shiny
+    shiny,
+    shinydashboard
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
