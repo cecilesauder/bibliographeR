@@ -2,6 +2,7 @@
 
 [![Travis build
 status](https://travis-ci.com/cecilesauder/bibliographeR.svg?branch=master)](https://travis-ci.com/cecilesauder/bibliographeR)
+[![codecov](https://codecov.io/gh/cecilesauder/bibliographeR/branch/master/graph/badge.svg)](https://codecov.io/gh/cecilesauder/bibliographeR)
 
 ## Overview
 
