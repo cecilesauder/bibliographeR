@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' gets_ids("oyster herpesvirus")
+#' get_ids("oyster herpesvirus")
 get_ids <- function(query, retmax = 1000){
   query_search <- rentrez::entrez_search(db = "pubmed", term = query, retmode = "xml" , retmax = retmax)
   query_search$ids
@@ -22,9 +22,6 @@ get_ids <- function(query, retmax = 1000){
 #' @return a character with XML code
 #' @export
 #'
-#' @examples
-#' gets_ids("oyster herpesvirus") %>%
-#'   get_xml()
 get_xml <- function(ids){
   rentrez::entrez_fetch(db = "pubmed", id = ids, rettype = "xml")
 }
@@ -40,11 +37,6 @@ get_xml <- function(ids){
 #' @return a list with all the "variable selected" for all the articles in the XML
 #' @export
 #'
-#' @examples
-#' library(magrittr)
-#' gets_ids("oyster herpesvirus") %>%
-#'   get_xml() %>%
-#'   get_from_xml("title")
 get_from_xml <- function(xml, what = "title"){
   rentrez::parse_pubmed_xml(xml) %>%
     purrr::map(what)
@@ -61,11 +53,6 @@ get_from_xml <- function(xml, what = "title"){
 #' @return a tibble with 2 columns, id and "variable selected"
 #' @export
 #'
-#' @examples
-#' query <- "oyster herpesvirus"
-#' xml <- get_ids(query) %>%
-#'          get_xml()
-#' make_df(query, xml, "abstract" )
 make_df <- function(query, xml, var){
   tib <- dplyr::tibble(id = get_ids(query), var = get_from_xml(xml, var)) %>% dplyr::na_if("NULL") %>% tidyr::unnest()
   names(tib) <- c("id", var)

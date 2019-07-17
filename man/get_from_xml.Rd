@@ -19,9 +19,3 @@ a list with all the "variable selected" for all the articles in the XML
 Get a variable from XML
 variables availables are "title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract"
 }
-\examples{
-library(magrittr)
-gets_ids("oyster herpesvirus") \%>\%
-  get_xml() \%>\%
-  get_from_xml("title")
-}

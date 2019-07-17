@@ -15,7 +15,3 @@ a character with XML code
 \description{
 Get XML code from NCBI giving a ids vector
 }
-\examples{
-gets_ids("oyster herpesvirus") \%>\%
-  get_xml()
-}

@@ -19,9 +19,3 @@ a tibble with 2 columns, id and "variable selected"
 \description{
 Make a data frame with ID and an other variable of interest ("title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract")
 }
-\examples{
-query <- "oyster herpesvirus"
-xml <- get_ids(query) \%>\%
-         get_xml()
-make_df(query, xml, "abstract" )
-}

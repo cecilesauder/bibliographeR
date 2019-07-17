@@ -18,5 +18,5 @@ a vector with ids
 Get ID (or PMID) from a query to NCBI
 }
 \examples{
-gets_ids("oyster herpesvirus")
+get_ids("oyster herpesvirus")
 }
