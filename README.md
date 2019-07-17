@@ -26,5 +26,4 @@ devtools::install_github('cecilesauder/bibliographeR')
 
 ## Shiny app online
 
-If you don't want to install the package but just to test the application, it is deployed [here](https://cecilesauder.shiny
-apps.io/bibliographer).
+If you don't want to install the package but just to test the application, it is deployed [here](https://cecilesauder.shinyapps.io/bibliographer).
