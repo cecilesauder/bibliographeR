@@ -1,0 +1,73 @@
+#' Get ID (or PMID) from a query to NCBI
+#'
+#' @param query a query to enter in NCBI
+#' @param retmax the maximum number of results (default = 1000)
+#'
+#' @return a vector with ids
+#' @export
+#'
+#' @examples
+#' gets_ids("oyster herpesvirus")
+get_ids <- function(query, retmax = 1000){
+  query_search <- rentrez::entrez_search(db = "pubmed", term = query, retmode = "xml" , retmax = retmax)
+  query_search$ids
+}
+
+#' Get XML code from NCBI giving a ids vector
+#'
+#' @param ids a vector with articles ids (PMID)
+#'
+#' @import magrittr
+#'
+#' @return a character with XML code
+#' @export
+#'
+#' @examples
+#' gets_ids("oyster herpesvirus") %>%
+#'   get_xml()
+get_xml <- function(ids){
+  rentrez::entrez_fetch(db = "pubmed", id = ids, rettype = "xml")
+}
+
+#' Get a variable from XML
+#' variables availables are "title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract"
+#'
+#' @import magrittr
+#'
+#' @param xml a character with XML code
+#' @param what the name of the variable you want
+#'
+#' @return a list with all the "variable selected" for all the articles in the XML
+#' @export
+#'
+#' @examples
+#' library(magrittr)
+#' gets_ids("oyster herpesvirus") %>%
+#'   get_xml() %>%
+#'   get_from_xml("title")
+get_from_xml <- function(xml, what = "title"){
+  rentrez::parse_pubmed_xml(xml) %>%
+    purrr::map(what)
+}
+
+#' Make a data frame with ID and an other variable of interest ("title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract")
+#'
+#' @import magrittr
+#'
+#' @param query a query to enter to NCBI
+#' @param xml a character with XML code
+#' @param var the name of the variable you want
+#'
+#' @return a tibble with 2 columns, id and "variable selected"
+#' @export
+#'
+#' @examples
+#' query <- "oyster herpesvirus"
+#' xml <- get_ids(query) %>%
+#'          get_xml()
+#' make_df(query, xml, "abstract" )
+make_df <- function(query, xml, var){
+  tib <- dplyr::tibble(id = get_ids(query), var = get_from_xml(xml, var)) %>% dplyr::na_if("NULL") %>% tidyr::unnest()
+  names(tib) <- c("id", var)
+  tib
+}
