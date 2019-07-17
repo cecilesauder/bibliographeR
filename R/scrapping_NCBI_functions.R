@@ -46,15 +46,14 @@ get_from_xml <- function(xml, what = "title"){
 #'
 #' @import magrittr
 #'
-#' @param query a query to enter to NCBI
 #' @param xml a character with XML code
 #' @param var the name of the variable you want
 #'
 #' @return a tibble with 2 columns, id and "variable selected"
 #' @export
 #'
-make_df <- function(query, xml, var){
-  tib <- dplyr::tibble(id = get_ids(query), var = get_from_xml(xml, var)) %>% dplyr::na_if("NULL") %>% tidyr::unnest()
+make_df <- function(xml, var){
+  tib <- dplyr::tibble(pmid = get_from_xml(xml, "pmid"), var = get_from_xml(xml, var)) %>% dplyr::na_if("NULL") %>% tidyr::unnest()
   names(tib) <- c("id", var)
   tib
 }
