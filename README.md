@@ -10,6 +10,12 @@ Package with a shiny app
 
 You can see the project [here](https://github.com/propan2one/BibliographeR)
 
+For the moment, the Shiny App doesn't work, I'm working on it and you probably can test it around july 22... 
+
+Some (really messy) code (that we use to our useR!2019 lightning talk) is available [here](https://github.com/propan2one/BibliographeR/blob/master/results/bazar_bibliographeR/oyster_example.Rmd)
+
+
+
 
 ## Installation 
 
@@ -20,4 +26,5 @@ devtools::install_github('cecilesauder/bibliographeR')
 
 ## Shiny app online
 
-If you don't want to install the package but just to test the application, it is deployed here.
+If you don't want to install the package but just to test the application, it is deployed [here](https://cecilesauder.shiny
+apps.io/bibliographer).

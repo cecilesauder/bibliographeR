@@ -18,7 +18,7 @@ ui <- dashboardPage(skin = "purple",
    dashboardHeader(title = "BibliographeR"),
 
    dashboardSidebar(
-      textInput("keywords", "Enter you keywords as in the NCBI webpage :"),
+      textInput("query", "Enter you keywords as in the NCBI webpage :"),
       sidebarMenu(
          menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
          menuItem("Citations Analysis", tabName = "citations", icon = icon("book")),
