@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 library(bibliographeR)
 library(dplyr)
 library(tidyr)
+library(plotly)
+library(ggplot2)
 ```
 
 
@@ -52,5 +54,24 @@ authors <- authors %>%
 
 authors %>%
   count(lastname, sort = TRUE)
+```
+
+
+## plot evolution number of article by year
+```{r}
+
+plot_evo <- xml %>%
+  make_df("year") %>%
+  count(year, sort = TRUE) %>%
+  arrange(year) %>%
+  mutate(nb_paper = cumsum(n),
+         year = as.numeric(year)) %>%
+  ggplot(aes(x = year, y = nb_paper )) +
+  geom_line() +
+  geom_point(col = "red") 
+
+ggplotly(plot_evo)
+
+
 ```
 

@@ -45,7 +45,11 @@ ui <- dashboardPage(skin = "purple",
       ),
 
       tabItems(
-         tabItem("overview"),
+         tabItem("overview",
+                 fluidRow(
+                    valueBoxOutput("nbArticleBox")
+                 ),
+                 plotlyOutput("plot_evo")),
          tabItem("citations"),
          tabItem("abstract"),
          tabItem("authors",
@@ -60,14 +64,37 @@ ui <- dashboardPage(skin = "purple",
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-   # Define a reactive expression for the document term matrix
-   reactive_ids <- reactive({
-      # Change when the "search" button is pressed...
-      input$search
+   reactive_ids <- eventReactive(input$search, {
       get_ids(query = input$query)
    })
 
+   ## Overview
 
+   output$nbArticleBox <- renderValueBox({
+      valueBox(
+         reactive_ids() %>% length(), "# Articles", icon = icon("newspaper"),
+         color = "purple"
+      )
+   })
+
+   output$plot_evo <- renderPlotly({
+
+      plot_evo <- reactive_ids() %>%
+         get_xml() %>%
+         make_df(var = "year") %>%
+         count(year, sort = TRUE) %>%
+         arrange(year) %>%
+         mutate(nb_paper = cumsum(n),
+                year = as.numeric(year)) %>%
+         ggplot(aes(x = year, y = nb_paper )) +
+         geom_line() +
+         geom_point(col = "red")
+
+      ggplotly(plot_evo)
+
+   })
+
+   ## Authors
 
    output$xml <- renderText({
       xml <- reactive_ids() %>% get_xml()
