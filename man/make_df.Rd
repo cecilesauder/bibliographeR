@@ -4,11 +4,9 @@
 \alias{make_df}
 \title{Make a data frame with ID and an other variable of interest ("title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract")}
 \usage{
-make_df(query, xml, var)
+make_df(xml, var)
 }
 \arguments{
-\item{query}{a query to enter to NCBI}
-
 \item{xml}{a character with XML code}
 
 \item{var}{the name of the variable you want}
