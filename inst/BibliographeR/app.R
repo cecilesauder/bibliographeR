@@ -9,6 +9,9 @@
 
 library(shiny)
 library(shinydashboard)
+library(bibliographeR)
+library(plotly)
+library(magrittr)
 
 
 
@@ -19,6 +22,7 @@ ui <- dashboardPage(skin = "purple",
 
    dashboardSidebar(
       textInput("query", "Enter you keywords as in the NCBI webpage :"),
+      actionButton("search", "Search"),
       sidebarMenu(
          menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
          menuItem("Citations Analysis", tabName = "citations", icon = icon("book")),
@@ -38,6 +42,15 @@ ui <- dashboardPage(skin = "purple",
                      max = 2019,
                      value = 2019
          )
+      ),
+
+      tabItems(
+         tabItem("overview"),
+         tabItem("citations"),
+         tabItem("abstract"),
+         tabItem("authors",
+                 textOutput("xml")
+                 )
       )
 
    )
@@ -46,6 +59,20 @@ ui <- dashboardPage(skin = "purple",
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+
+   # Define a reactive expression for the document term matrix
+   reactive_ids <- reactive({
+      # Change when the "search" button is pressed...
+      input$search
+      get_ids(query = input$query)
+   })
+
+
+
+   output$xml <- renderText({
+      xml <- reactive_ids() %>% get_xml()
+      print(xml)
+   })
 
 }
 
