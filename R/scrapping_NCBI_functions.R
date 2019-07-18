@@ -53,7 +53,7 @@ get_from_xml <- function(xml, what = "title"){
 #' @export
 #'
 make_df <- function(xml, var){
-  tib <- dplyr::tibble(pmid = get_from_xml(xml, "pmid"), var = get_from_xml(xml, var)) %>% dplyr::na_if("NULL") %>% tidyr::unnest()
+  tib <- dplyr::tibble(pmid = get_from_xml(xml, "pmid") %>% purrr::flatten_chr(), var = get_from_xml(xml, var)) %>% dplyr::na_if("NULL") %>% tidyr::unnest()
   names(tib) <- c("id", var)
   tib
 }

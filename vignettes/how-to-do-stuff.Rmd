@@ -1,0 +1,56 @@
+---
+title: "How to do stuff"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to do stuff}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bibliographeR)
+library(dplyr)
+library(tidyr)
+```
+
+
+# Get ids of articles from a query
+
+## get_ids()
+
+```{r}
+xml <- get_ids(query = "oyster herpesvirus") %>%
+  get_xml() 
+
+```
+
+
+# Get some informations from the results of the query
+
+## make_df()
+
+Example with authors, but you can choose "title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract"
+
+```{r}
+
+authors <- xml %>%
+  make_df("authors")
+
+authors %>%
+  count(authors, sort = TRUE)
+
+
+authors <- authors %>%
+  separate(authors, c("lastname", "firstname"), ", ")
+
+authors %>%
+  count(lastname, sort = TRUE)
+```
+
