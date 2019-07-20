@@ -19,7 +19,9 @@ Imports:
     magrittr,
     dplyr,
     purrr,
-    tidyr
+    tidyr,
+    ggplot2,
+    plotly
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
