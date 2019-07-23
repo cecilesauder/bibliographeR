@@ -38,6 +38,9 @@ get_xml <- function(ids){
 #' @export
 #'
 get_from_xml <- function(xml, what = "title"){
+  if (!is_character(what)) {
+    stop("'what' must be a character")
+  }
   rentrez::parse_pubmed_xml(xml) %>%
     purrr::map(what)
 }
