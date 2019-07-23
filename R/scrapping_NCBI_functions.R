@@ -45,6 +45,27 @@ get_from_xml <- function(xml, what = "title"){
     purrr::map(what)
 }
 
+#' Get a citations available from XML
+#'
+#' @import roomba
+#'
+#' @param xml a character with XML code
+#'
+#' @return a list with all the PMID for all the articles in the XML if it's possible. Otherwise it's NULL
+#' @export
+#'
+#' @examples
+#' get_citation(xml)
+get_citation <- function(xml){
+  if (!exists("xml")) {
+    stop("You don't have output from get_ids(), please run the function first")
+  }
+  XML::xmlToList(xml) %>%
+    purrr::map(c("PubmedData", "ReferenceList"),.default = NA) %>%
+    purrr::map(roomba, "text") %>%
+    purrr::map("text")
+}
+
 #' Make a data frame with ID and an other variable of interest ("title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract")
 #'
 #' @import magrittr
