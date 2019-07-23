@@ -47,22 +47,18 @@ get_from_xml <- function(xml, what = "title"){
 
 #' Get a citations available from XML
 #'
-#' @import roomba
+#' @import magrittr
 #'
 #' @param xml a character with XML code
 #'
-#' @return a list with all the PMID for all the articles in the XML if it's possible. Otherwise it's NULL
+#' @return a list with all the PMID for all the articles cited in the XML if it's possible. Otherwise it's NULL
 #' @export
 #'
-#' @examples
-#' get_citation(xml)
-get_citation <- function(xml){
-  if (!exists("xml")) {
-    stop("You don't have output from get_ids(), please run the function first")
-  }
+get_citations <- function(xml){
+
   XML::xmlToList(xml) %>%
     purrr::map(c("PubmedData", "ReferenceList"),.default = NA) %>%
-    purrr::map(roomba, "text") %>%
+    purrr::map(roomba::roomba, "text") %>%
     purrr::map("text")
 }
 

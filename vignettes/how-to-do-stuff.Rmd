@@ -75,3 +75,10 @@ ggplotly(plot_evo)
 
 ```
 
+# Get citations
+
+```{r}
+xml %>% 
+  get_citations()
+```
+
