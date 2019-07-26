@@ -80,5 +80,6 @@ ggplotly(plot_evo)
 ```{r}
 xml %>% 
   get_citations()
+
 ```
 
