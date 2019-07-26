@@ -21,7 +21,10 @@ Imports:
     purrr,
     tidyr,
     ggplot2,
-    plotly
+    plotly,
+    roomba,
+    XML
+Remotes: ropenscilabs/roomba
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 

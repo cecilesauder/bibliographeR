@@ -38,8 +38,28 @@ get_xml <- function(ids){
 #' @export
 #'
 get_from_xml <- function(xml, what = "title"){
+  if (!purrr::is_character(what)) {
+    stop("'what' must be a character")
+  }
   rentrez::parse_pubmed_xml(xml) %>%
     purrr::map(what)
+}
+
+#' Get a citations available from XML
+#'
+#' @import magrittr
+#'
+#' @param xml a character with XML code
+#'
+#' @return a list with all the PMID for all the articles cited in the XML if it's possible. Otherwise it's NULL
+#' @export
+#'
+get_citations <- function(xml){
+
+  XML::xmlToList(xml) %>%
+    purrr::map(c("PubmedData", "ReferenceList"),.default = NA) %>%
+    purrr::map(roomba::roomba, "text") %>%
+    purrr::map("text")
 }
 
 #' Make a data frame with ID and an other variable of interest ("title", "authors", "year", "journal", "volume", "issue", "pages", "key_words", "doi", "pmid", "abstract")
